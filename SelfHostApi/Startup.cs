@@ -18,10 +18,10 @@ namespace SelfHostApi
             HttpConfiguration config = new HttpConfiguration();
             ConfigureOAuth(app);
             WebApiConfig.Register(config);
+            UnityConfig.Register(config);
+            app.UseWebApi(config);
 
             app.UseCors(CorsOptions.AllowAll);
-
-            app.UseWebApi(config);
         }
 
 
@@ -31,8 +31,9 @@ namespace SelfHostApi
             {
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/token"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
-                Provider = new AuthorizationServerProvider()
+                AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(30),
+                Provider = new AuthorizationServerProvider(),
+                RefreshTokenProvider = new RefreshTokenProvider()
             };
 
             // Token Generation

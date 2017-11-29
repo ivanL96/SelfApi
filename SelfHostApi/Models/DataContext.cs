@@ -12,7 +12,19 @@ namespace SelfHostApi.Models
         {
         }
 
-        public DbSet<Client> Clients { get; set; }
-        public DbSet<RefreshToken> RefreshTokens { get; set; }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany(x => x.UserMessages).WithRequired(x => x.ApplicationUser)
+                .HasForeignKey(x => x.ApplicationUserId).WillCascadeOnDelete(true);
+
+
+            base.OnModelCreating(modelBuilder);
+        }
+
+        public virtual DbSet<Client> Clients { get; set; }
+        public virtual DbSet<RefreshToken> RefreshTokens { get; set; }
+
+        public virtual DbSet<Message> Messages { get; set; }
     }
 }

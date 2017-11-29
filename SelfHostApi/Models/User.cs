@@ -11,5 +11,7 @@ namespace SelfHostApi.Models
     public class ApplicationUser : IdentityUser
     {
         public string AccessToken { get; set; }
+
+        public virtual ICollection<Message> UserMessages { get; set; }
     }
 }
