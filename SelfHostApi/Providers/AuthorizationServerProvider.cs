@@ -28,8 +28,8 @@ namespace SelfHostApi.Providers
             {
                 //Remove the comments from the below line context.SetError, and invalidate context 
                 //if you want to force sending clientId/secrects once obtain access tokens. 
-                context.Validated();
-                //context.SetError("invalid_clientId", "ClientId should be sent.");
+                //context.Validated();
+                context.SetError("invalid_clientId", "ClientId should be sent.");
                 return Task.FromResult<object>(null);
             }
 
@@ -44,22 +44,22 @@ namespace SelfHostApi.Providers
                 return Task.FromResult<object>(null);
             }
 
-            //if (client.ApplicationType == ApplicationTypes.NativeConfidential)
-            //{
-            //    if (string.IsNullOrWhiteSpace(clientSecret))
-            //    {
-            //        context.SetError("invalid_clientId", "Client secret should be sent.");
-            //        return Task.FromResult<object>(null);
-            //    }
-            //    else
-            //    {
-            //        if (client.Secret != Helper.GetHash(clientSecret))
-            //        {
-            //            context.SetError("invalid_clientId", "Client secret is invalid.");
-            //            return Task.FromResult<object>(null);
-            //        }
-            //    }
-            //}
+            if (client.ApplicationType == ApplicationTypes.NativeConfidential)
+            {
+                if (string.IsNullOrWhiteSpace(clientSecret))
+                {
+                    context.SetError("invalid_clientId", "Client secret should be sent.");
+                    return Task.FromResult<object>(null);
+                }
+                else
+                {
+                    if (client.Secret != Helper.GetHash(clientSecret))
+                    {
+                        context.SetError("invalid_clientId", "Client secret is invalid.");
+                        return Task.FromResult<object>(null);
+                    }
+                }
+            }
 
             if (!client.Active)
             {
@@ -80,7 +80,7 @@ namespace SelfHostApi.Providers
 
             if (allowedOrigin == null) allowedOrigin = "*";
 
-            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
+            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
 
             using (AuthRepository _repo = new AuthRepository())
             {

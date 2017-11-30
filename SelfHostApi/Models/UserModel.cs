@@ -10,6 +10,7 @@ namespace SelfHostApi.Models
     public class UserModel
     {
         [Required]
+        [EmailAddress]
         public string UserName { get; set; }
 
         [Required]

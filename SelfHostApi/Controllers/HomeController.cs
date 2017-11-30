@@ -26,27 +26,28 @@ namespace SelfHostApi.Controllers
             public string Name { get; set; }
             public string Description { get; set; }
             public DateTime Created { get; set; }
-            public string User { get; set; }
         }
 
         // GET api/home 
-        public HttpResponseMessage Get()
+        [Authorize]
+        public HttpResponseMessage Get(string name)
         {
-            var list = repo.GetList();
+            var query = repo.CreateQuery();
             var viewlist = new List<MessageView>();
 
-            foreach (var item in list)
+            if(name!=null)
+                query = 
+
+            foreach (var item in query)
             {
                 var view = new MessageView
                 {
                     Name = item.Name,
                     Description = item.Description,
-                    Created = item.Created,
-                    User = item.ApplicationUser.UserName
+                    Created = item.Created
                 };
                 viewlist.Add(view);
             }
-
             return Request.CreateResponse(HttpStatusCode.OK, viewlist); 
         }
 
@@ -62,7 +63,6 @@ namespace SelfHostApi.Controllers
             string roleValue = principal.Claims.FirstOrDefault(c => c.Type == "role").Value;
             string email = ClaimsPrincipal.Current.Claims.FirstOrDefault(c => c.Type == "sub").Value;
             
-
             try
             {
                 var userId = repo.GetUser(email)?.Id;

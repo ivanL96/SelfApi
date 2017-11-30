@@ -11,6 +11,11 @@ namespace SelfHostApi.Providers
 {
     public class RefreshTokenProvider : IAuthenticationTokenProvider
     {
+        public void Create(AuthenticationTokenCreateContext context)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task CreateAsync(AuthenticationTokenCreateContext context)
         {
             var clientid = context.Ticket.Properties.Dictionary["as:client_id"];
@@ -48,6 +53,11 @@ namespace SelfHostApi.Providers
                 }
 
             }
+        }
+
+        public void Receive(AuthenticationTokenReceiveContext context)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task ReceiveAsync(AuthenticationTokenReceiveContext context)

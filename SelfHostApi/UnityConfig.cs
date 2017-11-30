@@ -16,7 +16,7 @@ namespace SelfHostApi
         public static void Register(HttpConfiguration config)
         {
             var container = new UnityContainer();
-            container.RegisterType<IRepository, MessageRepository>(new HierarchicalLifetimeManager());
+            container.RegisterType<IRepository, MessageDapperRepository>(new HierarchicalLifetimeManager());
             config.DependencyResolver = new UnityResolver(container);
 
             //filters

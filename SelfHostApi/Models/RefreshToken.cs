@@ -19,6 +19,7 @@ namespace SelfHostApi.Models
         public string ClientId { get; set; }
         public DateTime IssuedUtc { get; set; }
         public DateTime ExpiresUtc { get; set; }
+
         [Required]
         public string ProtectedTicket { get; set; }
     }

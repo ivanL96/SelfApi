@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using Dapper;
+using System.Linq.Expressions;
 
 namespace SelfHostApi.Repository
 {
@@ -25,6 +26,16 @@ namespace SelfHostApi.Repository
 
             db.Close();
             return list;
+        }
+
+        public IQueryable<Message> CreateQuery()
+        {
+            return db.Query<Message>("SELECT * FROM Messages").AsQueryable();
+        }
+
+        public IQueryable<Message> FilterQuery(IQueryable<Message> query, Expression<Func<Message, bool>> predicate)
+        {
+            return query.Where(predicate);
         }
 
         public ApplicationUser GetUser(string email)

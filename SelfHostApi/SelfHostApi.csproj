@@ -152,6 +152,7 @@
   <ItemGroup>
     <Compile Include="Abstract\IRepository.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Migrations\201711281346081_init.cs" />
@@ -169,6 +170,14 @@
     <Compile Include="Migrations\201711290842279_messages.cs" />
     <Compile Include="Migrations\201711290842279_messages.Designer.cs">
       <DependentUpon>201711290842279_messages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711301003216_removeClient.cs" />
+    <Compile Include="Migrations\201711301003216_removeClient.Designer.cs">
+      <DependentUpon>201711301003216_removeClient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711301027178_client.cs" />
+    <Compile Include="Migrations\201711301027178_client.Designer.cs">
+      <DependentUpon>201711301027178_client.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Client.cs" />
@@ -217,6 +226,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711290842279_messages.resx">
       <DependentUpon>201711290842279_messages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711301003216_removeClient.resx">
+      <DependentUpon>201711301003216_removeClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711301027178_client.resx">
+      <DependentUpon>201711301027178_client.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
